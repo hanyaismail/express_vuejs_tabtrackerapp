@@ -3,7 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
-
+const {sequelize} = require('./models')
+const config = require('./config/config')
 
 var app = express();
 
@@ -11,12 +12,11 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post('/register', (req, res) => {
-	res.send({
-		message: `Hello ${req.body.email} Your user have register now, have fun!`
-	});
-});
+require('./routes')(app);
 
-app.listen(3000, () => {
-	console.log('Server started on port 3000');
-});
+//connect to database
+sequelize.sync()
+	.then(() => {
+		app.listen(config.port);
+		console.log(`Server running on port ${config.port}`);
+	})
