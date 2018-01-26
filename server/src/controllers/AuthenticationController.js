@@ -29,18 +29,22 @@ module.exports = {
 	async login (req, res) {
 		try {
 			const{email, password} = req.body
+
+			//find user based on email
 			const user = await User.findOne({
 				where: {
 					email: email
 				}
 			});
 
+			//if user doesn't exists
 			if(!user) {
 				res.status(403).send({
 					error: 'The login information was incorrect'
 				})
 			}
 
+			//check the password with comparePassword function
 			const isPasswordValid = await user.comparePassword(password);
 			if(!isPasswordValid) {
 				res.status(403).send({
@@ -48,13 +52,14 @@ module.exports = {
 				})
 			}
 
-			// console.log(req.body);
+			// make token and send it as the response
 			const userJson = user.toJSON();
 			res.send({
 				user: userJson,
 				token: jwtSignUser(userJson)
 			})
 
+			// if an error occured
 		} catch(err) {
 			res.status(500).send({
 				error: 'An error was occured trying to log in'

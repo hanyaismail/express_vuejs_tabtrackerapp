@@ -32,6 +32,32 @@ export default {
   margin-top: 60px;
 }
 
+.danger-alert {
+  color: red;
+}
+
+.song {
+  padding: 20px;
+  height: 330px;
+  overflow: hidden;
+}
+
+.song-title {
+  font-size: 30px;
+}
+
+.song-artist {
+  font-size: 24px;
+}
+
+.song-genre {
+  font-size: 18px;
+}
+
+.album-image {
+  width: 70%;
+  margin: 0 auto;
+}
 /*.input-group--text-field input{
   border-bottom: 1px solid black;
 }

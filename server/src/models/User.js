@@ -1,6 +1,7 @@
 const Promise = require('bluebird');
 const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'));
 
+//hashing function
 function hashPassword (user, options) {
 	const SALT_FACTOR = 8
 
@@ -31,7 +32,9 @@ const User = sequelize.define('User', {
 			beforeSave: hashPassword
 		}
 	})
+	
 
+	//prototype comparePassword function, used in AuthenticationController.login to
 	User.prototype.comparePassword = function (password) {
 		return bcrypt.compareAsync(password, this.password)
 	}
