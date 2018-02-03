@@ -22,7 +22,7 @@
          <br>
             
          <div 
-         	class="error" 
+         	class="danger-alert" 
          	v-html="error"
          ></div>
          
@@ -41,7 +41,6 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
-import Panel from '@/components/Panel'
 
 export default {
   data () {
@@ -53,7 +52,7 @@ export default {
   },
 
   components: {
-    Panel
+
   },
 
   methods: {
@@ -64,8 +63,9 @@ export default {
           password: this.password
         })
 
-        this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setUser', response.data.user)
+        // this.$store.dispatch('setToken', response.data.token)
+        // this.$store.dispatch('setUser', response.data.user)
+        this.$router.push({name: 'login'})
         
       } catch (error) {
         this.error = error.response.data.error  

@@ -8,9 +8,11 @@ const config = require('./config/config')
 
 var app = express();
 
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
+
+require('./passport')
 
 require('./routes')(app);
 

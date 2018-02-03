@@ -11,7 +11,7 @@
 
         <div class="pl-4 pr-4 pt-2 pb-2">
         	<slot>
-            <!-- slot in here -->
+            We found nothing
         	</slot>
         </div>
 
@@ -30,4 +30,4 @@
 
 <style>
 	
-</style>
+</style>vue

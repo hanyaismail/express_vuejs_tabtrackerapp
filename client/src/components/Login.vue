@@ -19,7 +19,7 @@
          <br>
             
          <div 
-         	class="error" 
+         	class="danger-alert" 
          	v-html="error"
          ></div>
          
@@ -38,7 +38,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
-import Panel from '@/components/Panel'
+import {mapState} from 'vuex'
 
 export default {
   data () {
@@ -49,8 +49,18 @@ export default {
   	}
   },
 
-  components: {
-  	Panel
+  computed: {
+    ...mapState([
+        'isUserLoggedIn',
+        'token'
+      ])
+  },
+
+  created () {
+    console.log('created')
+    if(this.token) {
+      this.$router.push({name: 'songs'})
+    }
   },
 
   methods: {
@@ -63,6 +73,7 @@ export default {
 
           this.$store.dispatch('setToken', response.data.token)
           this.$store.dispatch('setUser', response.data.user)
+          this.$router.push({name: 'songs'})
           
 	      } catch (error) {
 	        this.error = error.response.data.error  
